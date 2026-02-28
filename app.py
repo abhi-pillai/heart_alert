@@ -23,6 +23,11 @@ app    = Flask(__name__)
 joined_users = set()   # WhatsApp numbers that sent START
 TOKENS = {}            # { token: { "expires": float, "pdf_path": str } }
 
+# ══════════════════════════════════════════════════════════════════════════════
+# index route for cron job  
+@app.route("/")
+def index():
+    return {"status": "ok"}, 200
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECURITY — Protect /trigger-alert with API key from React Native
