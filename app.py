@@ -172,7 +172,7 @@ def trigger_alert():
     prediction = data["prediction"]
     location   = data["location"]
     ecg_data   = data["ecg_snapshot"]
-
+    model_name = data["model_name"]
     name      = patient["name"]
     condition = prediction["condition"]
     severity  = prediction["severity"]
@@ -187,6 +187,7 @@ def trigger_alert():
         patient    = patient,
         prediction = prediction,
         ecg_data   = ecg_data,
+        model_name = model_name
     )
 
     # Step 3 — Secure one-time token for PDF

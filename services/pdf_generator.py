@@ -108,11 +108,12 @@ def info_table(rows, col_widths):
 
 
 # ── Main PDF generator ─────────────────────────────────────────────────────────
-def generate_pdf(patient, prediction, ecg_data, sample_rate=250):
+def generate_pdf(patient, prediction, ecg_data, sample_rate=250,model_name=None):
     """
     patient    : dict  — name, age, user_name, device_name
     prediction : dict  — condition, severity, confidence, heart_rate, rhythm_class
     ecg_data   : list  — raw float samples (last 30 s from React Native buffer)
+    model_name : str   — name of the model used for prediction
     Returns (pdf_path, pdf_filename)
     """
     pdf_filename = f"ecg_report_{uuid.uuid4().hex}.pdf"
@@ -199,11 +200,11 @@ def generate_pdf(patient, prediction, ecg_data, sample_rate=250):
         ["Test Time",      now.strftime("%H:%M:%S")],
     ]
     device_rows = [
-        ["Device Name",        patient.get("device_name", "AD8232 + ESP32")],
+        ["Device Name",        patient.get("device_name", "AD8232 + Ardunio UNO + ESP32")],
         ["Lead Configuration", "Single Lead (Lead I)"],
         ["Sample Rate",        f"{sample_rate} Hz"],
         ["Recording Duration", f"{int(duration_seconds)} seconds"],
-        ["Processed By",       "CNN-BiLSTM Model v1.0"],
+        ["Processed By",       f"{model_name}"],
     ]
 
     two_col = Table(
