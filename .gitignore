@@ -1,0 +1,21 @@
+# Virtual environment — the entire Lib/, Scripts/, Include/ folders
+Lib/
+Scripts/
+Include/
+share/
+pyvenv.cfg
+
+# Your secrets
+details.env
+
+# Generated PDF reports
+static/reports/*.pdf
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db

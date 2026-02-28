@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: heart-alert-system
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: BASE_URL
+        value: https://heart-alert-system.onrender.com
+      - key: API_KEY
+        generateValue: true
+      - key: account_sid
+        sync: false
+      - key: auth_token
+        sync: false
+      - key: from_number_whatsapp
+        sync: false
+      - key: from_number
+        sync: false
+      - key: to_number
+        sync: false

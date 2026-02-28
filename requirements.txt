@@ -1,0 +1,8 @@
+flask
+twilio
+matplotlib
+numpy
+reportlab
+requests
+python-dotenv
+gunicorn
