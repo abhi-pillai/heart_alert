@@ -15,10 +15,24 @@ def reverse_geocode(lat, lng):
         data = response.json()
 
         address = data.get("display_name", "Address unavailable")
+
+        # Extract structured address fields
+        addr     = data.get("address", {})
+        road     = addr.get("road", addr.get("street", ""))
+        suburb   = addr.get("suburb", addr.get("neighbourhood", ""))
+        city     = addr.get("city", addr.get("town", addr.get("village", "")))
+        state    = addr.get("state", "")
+        postcode = addr.get("postcode", "")
+
         maps_link = f"https://www.google.com/maps?q={lat},{lng}"
 
         return {
-            "address": address,
+            "address":  address,
+            "road":     road,
+            "suburb":   suburb,
+            "city":     city,
+            "state":    state,
+            "postcode": postcode,
             "maps_link": maps_link,
             "lat": lat,
             "lng": lng

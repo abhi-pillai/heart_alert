@@ -120,7 +120,7 @@ def whatsapp_webhook():
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# PDF SERVE — Secure one-time token access (unchanged from your original)
+# PDF SERVE — Secure one-time token access
 # ══════════════════════════════════════════════════════════════════════════════
 @app.route("/pdf")
 def serve_pdf():
@@ -187,6 +187,9 @@ def trigger_alert():
     address   = location_info["address"]
     maps_link = location_info["maps_link"]
 
+    # Format pincode digits for TTS (prevents "6 lakh eighty one thousand...")
+    postcode_tts = " ".join(list(str(location_info.get("postcode", ""))))
+
     # Step 2 — Generate PDF (no location inside — doctors don't need it)
     pdf_path, pdf_filename = generate_pdf(
         patient    = patient,
@@ -230,7 +233,7 @@ def trigger_alert():
         results["whatsapp_sid"] = "No WhatsApp users currently enrolled"
 
     # Step 5 — Voice call to RELATIVES / AMBULANCE
-    # Reads name, condition, severity, and full address aloud.
+    # Reads name, condition, severity, and structured address aloud.
     twiml = f"""
     <Response>
         <Say voice="alice" language="en-IN">
@@ -241,7 +244,9 @@ def trigger_alert():
             Detected Condition: {condition}.
             Severity Level: {severity}.
             <break time="0.5s"/>
-            Patient Location: {address[:150]}.
+            Patient Location: {location_info.get('road', '')}, {location_info.get('suburb', '')},
+            {location_info.get('city', '')}, {location_info.get('state', '')}.
+            Pincode: {postcode_tts}.
             <break time="0.5s"/>
             Please contact emergency services immediately and proceed to the patient location.
             This is an automated message. Please do not reply to this call.
