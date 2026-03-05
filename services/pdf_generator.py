@@ -33,7 +33,7 @@ TABLE_ALT      = colors.HexColor("#EBF5FB")
 
 
 # ── ECG Plot (hospital-style) ──────────────────────────────────────────────────
-def generate_ecg_plot(ecg_data, sample_rate=250):
+def generate_ecg_plot(ecg_data, sample_rate=360):
     total_samples  = len(ecg_data)
     actual_duration = total_samples / sample_rate
     time_axis      = np.linspace(0, actual_duration, total_samples)

@@ -233,7 +233,7 @@ def trigger_alert():
     # Reads name, condition, severity, and full address aloud.
     twiml = f"""
     <Response>
-        <Say voice="alice">
+        <Say voice="alice" language="en-IN">
             Attention. This is an automated medical alert.
             Abnormal cardiac activity has been detected and immediate attention is required.
             <break time="0.5s"/>
