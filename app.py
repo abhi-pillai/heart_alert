@@ -5,9 +5,9 @@ from services.pdf_generator import generate_pdf
 import secrets
 import time
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv('details.env')
+# load_dotenv('details.env')
 
 # ── Config ─────────────────────────────────────────────────────────────────────
 BASE_URL    = os.getenv("BASE_URL")
@@ -23,6 +23,10 @@ app    = Flask(__name__)
 joined_users = set()   # WhatsApp numbers that sent START
 TOKENS = {}            # { token: { "expires": float, "pdf_path": str } }
 
+
+@app.before_request
+def log_request():
+    print("Incoming request:", request.path)
 # ══════════════════════════════════════════════════════════════════════════════
 # index route for cron job  
 @app.route("/")
