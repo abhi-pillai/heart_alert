@@ -283,6 +283,30 @@ def trigger_alert():
         **results
     }), 200
 
+@app.route("/test", methods=["POST"])
+def trigger_alert1():
+    data = request.get_json()
+
+    patient    = data["patient"]
+    prediction = data["prediction"]
+    location   = data["location"]
+    ecg_data   = data["ecg_snapshot"]
+    model_name = data["model_name"]
+    name      = patient["name"]
+    condition = prediction["condition"]
+    severity  = prediction["severity"]
+
+    
+
+    return jsonify({
+        "status":   "Alert sent successfully"
+        "patient": name,
+        "condition": condition,
+        "severity": severity,
+        "ecg_data": ecg_data,
+        "location": location,
+        "prediction": prediction
+    }), 200
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
