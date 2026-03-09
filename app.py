@@ -299,7 +299,7 @@ def trigger_alert1():
     
 
     return jsonify({
-        "status":   "Alert sent successfully"
+        "status":   "Alert sent successfully",
         "patient": name,
         "condition": condition,
         "severity": severity,
