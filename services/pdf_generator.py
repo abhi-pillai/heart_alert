@@ -108,7 +108,7 @@ def info_table(rows, col_widths):
 
 
 # ── Main PDF generator ─────────────────────────────────────────────────────────
-def generate_pdf(patient, prediction, ecg_data, sample_rate=250,model_name=None):
+def generate_pdf(patient, prediction, ecg_data, sample_rate=360,model_name=None):
     """
     patient    : dict  — name, age, user_name, device_name
     prediction : dict  — condition, severity, confidence, heart_rate, rhythm_class
@@ -201,9 +201,9 @@ def generate_pdf(patient, prediction, ecg_data, sample_rate=250,model_name=None)
     ]
     device_rows = [
         ["Device Name",        patient.get("device_name", "AD8232 + Ardunio UNO + ESP32")],
-        ["Lead Configuration", "Single Lead (Lead I)"],
+        ["Lead Configuration", "Single Lead (Lead II)"],
         ["Sample Rate",        f"{sample_rate} Hz"],
-        ["Recording Duration", f"{int(duration_seconds)} seconds"],
+        ["Recording Duration", f"{round(duration_seconds,2)} seconds"],
         ["Processed By",       f"{model_name}"],
     ]
 
