@@ -26,8 +26,8 @@ TOKENS = {}            # { token: { "expires": float, "pdf_path": str } }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # index route for cron job  
-@app.route("/")
-def index():
+@app.route("/health")
+def health():
     return {"status": "ok"}, 200
 
 # ══════════════════════════════════════════════════════════════════════════════
